@@ -5,7 +5,10 @@ import './App.css';
 class App extends Component {
   constructor() {
     super()
-    this.state = {elements: []}
+    this.state = {
+      elements: [],
+      element: null
+    }
   }
 
   componentDidMount() {
@@ -53,7 +56,7 @@ class App extends Component {
         <div className="ui grid">
           <div className="ui one wide column">
           </div>
-          <div className="ui twelve wide column">
+          <div className="ui eleven wide column">
             <Table elements={this.formatElementsForTable()} />
           </div>
         </div>

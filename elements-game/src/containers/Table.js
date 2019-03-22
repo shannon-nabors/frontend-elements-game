@@ -5,7 +5,13 @@ class Table extends Component {
   render() {
     return (
       <div id="p-table">
-        {this.props.elements.map(e => <Element key={e.number} element={e} />)}
+        {this.props.elements.map(e =>
+          <Element
+            key={e.number}
+            element={e}
+            
+          />)
+        }
       </div>
     )
   }
