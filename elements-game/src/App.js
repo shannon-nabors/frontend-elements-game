@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from './containers/Table';
 import Navbar from './containers/NavBar';
+import ElementDetails from './components/ElementDetails'
 import './App.css';
 
 class App extends Component {
@@ -14,21 +15,8 @@ class App extends Component {
     };
   }
 
-  handleNavSel = e => {
-    console.log(e.target.name);
-    this.setState({
-      navSel: e.target.value
-    });
-  };
 
-  handleGameSel = (e) => {
-    e.persist()
-    console.log(e.target.textContent)
-    this.setState({
-      gameSel: e.target.textContent
-    });
-  };
-
+  // Load all elements on mount
   componentDidMount() {
     fetch(
       'https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/PeriodicTableJSON.json'
@@ -37,11 +25,27 @@ class App extends Component {
       .then(elementsData => this.setState({ elements: elementsData.elements }));
   }
 
-  formatElementsForTable() {
-    let blankKey = 120;
+  // Handle clicks in navbar
+    handleNavSel = e => {
+      console.log(e.target.name);
+      this.setState({
+        navSel: e.target.value
+      });
+    };
 
-    const blanks = number => {
-      let blanksArr = [];
+    handleGameSel = (e) => {
+      e.persist()
+      console.log(e.target.textContent)
+      this.setState({
+        gameSel: e.target.textContent
+      });
+    };
+
+  // Array for table element -- includes blank spaces for display
+  formatElementsForTable() {
+    let blankKey = 120
+    const blanks = (number) => {
+      let blanksArr = []
       for (let i = 0; i < number; i++) {
         blanksArr.push({ number: blankKey });
         blankKey++;
@@ -69,14 +73,44 @@ class App extends Component {
     return formattedElements;
   }
 
+  // Handle click of element
+  handleElementClick = (el) => {
+    this.setSelectedElement(el)
+    console.log(el)
+  }
+
+  setSelectedElement = (el) => {
+    this.setState({element: el})
+  }
+
+  // Handle click outside of modal
+  handleModalExit = () => {
+    this.setState({element: null})
+  }
+
+  // Render page
   render() {
     return (
       <div className="App">
         <div className="ui grid">
-          <div className="ui one wide column" />
+          <div className="ui one wide column">
+          </div>
           <div className="ui twelve wide column">
-            <Navbar gameSel={this.state.gameSel} handleGameSel={this.handleGameSel} handleNavSel={this.handleNavSel} />
-            <Table elements={this.formatElementsForTable()} />
+            <Navbar
+              gameSel={this.state.gameSel} handleGameSel={this.handleGameSel} handleNavSel={this.handleNavSel}
+            />
+
+            <Table
+              elements={this.formatElementsForTable()}
+              handleClick={this.handleElementClick}
+            />
+
+            {this.state.element ?
+              <ElementDetails
+                element={this.state.element}
+                exit={this.handleModalExit}/>
+              : null
+            }
           </div>
         </div>
       </div>

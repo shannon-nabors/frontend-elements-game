@@ -7,7 +7,9 @@ class Element extends Component {
     return (
       <div
         id={number < 120 ? "element" : "blank"}
-        onClick={number < 120 ? this.props.handleClick : null}
+        onClick={number < 120 ?
+                 () => this.props.handleClick(this.props.element)
+                 : null}
       >
         {number < 120 ? symbol : null}
       </div>
