@@ -93,13 +93,17 @@ class App extends Component {
     return (
       <div className="App">
         <div className="ui grid">
-          <div className="ui one wide column">
+          <div className="ui row">
+            <div className="ui one wide column"></div>
+            <div className="ui twelve wide column">
+              <Navbar
+                gameSel={this.state.gameSel} handleGameSel={this.handleGameSel} handleNavSel={this.handleNavSel}
+              />
+            </div>
           </div>
-          <div className="ui twelve wide column">
-            <Navbar
-              gameSel={this.state.gameSel} handleGameSel={this.handleGameSel} handleNavSel={this.handleNavSel}
-            />
 
+          <div className="ui one wide column"></div>
+          <div className="ui eleven wide column">
             <Table
               elements={this.formatElementsForTable()}
               handleClick={this.handleElementClick}
