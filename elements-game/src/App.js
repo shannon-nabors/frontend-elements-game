@@ -38,7 +38,11 @@ class App extends Component {
        ...blanks(1),
        ...this.state.elements.slice(71,88),
        ...blanks(1),
-       ...this.state.elements.slice(103,118)
+       ...this.state.elements.slice(103,118),
+       ...blanks(20),
+       ...this.state.elements.slice(56,71),
+       ...blanks(3),
+       ...this.state.elements.slice(88,103),
      ]
     return formattedElements
   }
@@ -47,7 +51,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="ui grid">
-          <div className="ui two wide column">
+          <div className="ui one wide column">
           </div>
           <div className="ui twelve wide column">
             <Table elements={this.formatElementsForTable()} />
