@@ -12,3 +12,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#p-table {
+  margin-top: 50px;
+  /* background-color: #19BB61; */
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+}
+
+#element {
+  border: 2px solid white;
+  background-color: #19BB61;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5vmax;
+  padding: 30% 0%;
+}
+
+#blank {
+  border: 2px solid white;
+  background-color: white;
+  padding: 30% 0%;
+}
