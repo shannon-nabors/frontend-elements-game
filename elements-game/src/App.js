@@ -11,7 +11,7 @@ class App extends Component {
       elements: [],
       element: null,
       navSel: 'login',
-      gameSel: 'learn'
+      gameSel: 'Learn'
     };
   }
 
