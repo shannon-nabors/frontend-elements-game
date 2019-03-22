@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Table from './containers/Table'
-import './App.css';
+import ElementDetails from './components/ElementDetails'
+import './App.css'
 
 class App extends Component {
   constructor() {
@@ -60,6 +61,10 @@ class App extends Component {
     this.setState({element: el})
   }
 
+  // Handle click outside of modal
+  handleModalExit = () => {
+    this.setState({element: null})
+  }
 
   // Render page
   render() {
@@ -69,6 +74,12 @@ class App extends Component {
           <div className="ui one wide column">
           </div>
           <div className="ui eleven wide column">
+            {this.state.element ?
+              <ElementDetails
+                element={this.state.element}
+                exit={this.handleModalExit}/>
+              : null
+            }
             <Table
               elements={this.formatElementsForTable()}
               handleClick={this.handleElementClick}
