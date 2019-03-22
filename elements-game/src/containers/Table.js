@@ -9,7 +9,7 @@ class Table extends Component {
           <Element
             key={e.number}
             element={e}
-            
+            handleClick={this.props.handleClick}
           />)
         }
       </div>

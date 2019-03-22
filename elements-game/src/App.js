@@ -11,16 +11,16 @@ class App extends Component {
     }
   }
 
+  // Load all elements on mount
   componentDidMount() {
     fetch('https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/PeriodicTableJSON.json')
     .then(res => res.json())
     .then(elementsData => this.setState({elements: elementsData.elements}))
   }
 
+  // Array for table element -- includes blank spaces for display
   formatElementsForTable() {
-
     let blankKey = 120
-
     const blanks = (number) => {
       let blanksArr = []
       for (let i = 0; i < number; i++) {
@@ -50,6 +50,18 @@ class App extends Component {
     return formattedElements
   }
 
+  // Handle click of element
+  handleElementClick = (el) => {
+    this.setSelectedElement(el)
+    console.log(el)
+  }
+
+  setSelectedElement = (el) => {
+    this.setState({element: el})
+  }
+
+
+  // Render page
   render() {
     return (
       <div className="App">
@@ -57,7 +69,10 @@ class App extends Component {
           <div className="ui one wide column">
           </div>
           <div className="ui eleven wide column">
-            <Table elements={this.formatElementsForTable()} />
+            <Table
+              elements={this.formatElementsForTable()}
+              handleClick={this.handleElementClick}
+            />
           </div>
         </div>
       </div>
