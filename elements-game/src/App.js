@@ -25,21 +25,6 @@ class App extends Component {
       .then(elementsData => this.setState({ elements: elementsData.elements }));
   }
 
-  // Handle clicks in navbar
-    handleNavSel = e => {
-      console.log(e.target.name);
-      this.setState({
-        navSel: e.target.value
-      });
-    };
-
-    handleGameSel = (e) => {
-      e.persist()
-      console.log(e.target.textContent)
-      this.setState({
-        gameSel: e.target.textContent
-      });
-    };
 
   // Array for table element -- includes blank spaces for display
   formatElementsForTable() {
@@ -72,6 +57,22 @@ class App extends Component {
     ];
     return formattedElements;
   }
+
+  // Handle clicks in navbar
+    handleNavSel = e => {
+      console.log(e.target.name);
+      this.setState({
+        navSel: e.target.value
+      });
+    };
+
+    handleGameSel = (e) => {
+      this.setState({
+        gameSel: e.target.textContent,
+        element: null
+      });
+    };
+
 
   // Handle click of element
   handleElementClick = (el) => {
@@ -109,7 +110,7 @@ class App extends Component {
               handleClick={this.handleElementClick}
             />
 
-            {this.state.element ?
+            {this.state.gameSel === 'Learn' && this.state.element ?
               <ElementDetails
                 element={this.state.element}
                 exit={this.handleModalExit}/>
