@@ -18,6 +18,7 @@ code {
   /* background-color: #19BB61; */
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+  height: 39vw;
 }
 
 #element {
