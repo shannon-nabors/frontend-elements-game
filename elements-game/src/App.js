@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Table from './containers/Table';
 import Navbar from './containers/NavBar';
-import ElementDetails from './components/ElementDetails'
+import ElementDetails from './components/ElementDetails';
+import SideDisplay from './components/sideDisplay';
 import './App.css';
 
 class App extends Component {
@@ -15,7 +16,6 @@ class App extends Component {
     };
   }
 
-
   // Load all elements on mount
   componentDidMount() {
     fetch(
@@ -26,26 +26,26 @@ class App extends Component {
   }
 
   // Handle clicks in navbar
-    handleNavSel = e => {
-      console.log(e.target.name);
-      this.setState({
-        navSel: e.target.value
-      });
-    };
+  handleNavSel = e => {
+    console.log(e.target.name);
+    this.setState({
+      navSel: e.target.value
+    });
+  };
 
-    handleGameSel = (e) => {
-      e.persist()
-      console.log(e.target.textContent)
-      this.setState({
-        gameSel: e.target.textContent
-      });
-    };
+  handleGameSel = e => {
+    e.persist();
+    console.log(e.target.textContent);
+    this.setState({
+      gameSel: e.target.textContent
+    });
+  };
 
   // Array for table element -- includes blank spaces for display
   formatElementsForTable() {
-    let blankKey = 120
-    const blanks = (number) => {
-      let blanksArr = []
+    let blankKey = 120;
+    const blanks = number => {
+      let blanksArr = [];
       for (let i = 0; i < number; i++) {
         blanksArr.push({ number: blankKey });
         blankKey++;
@@ -74,19 +74,19 @@ class App extends Component {
   }
 
   // Handle click of element
-  handleElementClick = (el) => {
-    this.setSelectedElement(el)
-    console.log(el)
-  }
+  handleElementClick = el => {
+    this.setSelectedElement(el);
+    console.log(el);
+  };
 
-  setSelectedElement = (el) => {
-    this.setState({element: el})
-  }
+  setSelectedElement = el => {
+    this.setState({ element: el });
+  };
 
   // Handle click outside of modal
   handleModalExit = () => {
-    this.setState({element: null})
-  }
+    this.setState({ element: null });
+  };
 
   // Render page
   render() {
@@ -94,27 +94,31 @@ class App extends Component {
       <div className="App">
         <div className="ui grid">
           <div className="ui row">
-            <div className="ui one wide column"></div>
+            <div className="ui one wide column" />
             <div className="ui twelve wide column">
               <Navbar
-                gameSel={this.state.gameSel} handleGameSel={this.handleGameSel} handleNavSel={this.handleNavSel}
+                gameSel={this.state.gameSel}
+                handleGameSel={this.handleGameSel}
+                handleNavSel={this.handleNavSel}
               />
             </div>
           </div>
 
-          <div className="ui one wide column"></div>
+          <div className="ui one wide column" />
           <div className="ui eleven wide column">
             <Table
               elements={this.formatElementsForTable()}
               handleClick={this.handleElementClick}
             />
-
-            {this.state.element ?
+            {this.state.element ? (
               <ElementDetails
                 element={this.state.element}
-                exit={this.handleModalExit}/>
-              : null
-            }
+                exit={this.handleModalExit}
+              />
+            ) : null}
+          </div>
+          <div className="ui four wide column">
+            <SideDisplay />
           </div>
         </div>
       </div>
