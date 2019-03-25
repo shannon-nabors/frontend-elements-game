@@ -53,7 +53,8 @@ class App extends Component {
       ...blanks(20),
       ...this.state.elements.slice(56, 71),
       ...blanks(3),
-      ...this.state.elements.slice(88, 103)
+      ...this.state.elements.slice(88, 103),
+      ...blanks(1)
     ];
     return formattedElements;
   }
