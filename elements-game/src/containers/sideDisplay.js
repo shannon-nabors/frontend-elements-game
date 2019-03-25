@@ -9,18 +9,17 @@ class SideDisplay extends React.Component {
     return (
       <div className="side-display">
           <div>
-            {this.props.elements.length > 1?
+            {this.props.mode != "Learn" &&
               <Question
                 question={this.props.question}/>
-              : null
             }
-            {this.props.currentElement && <Answer
+            {this.props.mode != "Learn" && this.props.currentElement && <Answer
                      answer={this.props.question}
                      selection={this.props.currentElement}
                      currentScore={this.props.currentScore}
                   />}
-            <NextButton
-              handleClick={this.props.cycleQuestions}/>
+            {this.props.mode != "Learn" && this.props.currentElement && <NextButton
+              handleClick={this.props.cycleQuestions}/>}
           </div>
       </div>
     );

@@ -91,6 +91,8 @@ class App extends Component {
       this.setState({
         gameSel: e.target.textContent,
         element: null,
+        correct: 0,
+        total: 0
       });
       if (e.target.textContent === "Quiz") {
         this.setState({questions: this.chooseQuestions()})
