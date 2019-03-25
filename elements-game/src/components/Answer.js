@@ -9,7 +9,7 @@ class Answer extends React.Component {
         <div className="answer">
           <div className="header">
             {this.props.answer === this.props.selection ? "Correct!" : "Incorrect!"}
-            {this.props.currentScore()}
+            Current score: {this.props.currentScore()}
           </div>
 
           <div className="header">

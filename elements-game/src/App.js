@@ -15,7 +15,6 @@ class App extends Component {
       navSel: 'login',
       gameSel: 'Learn',
       questions: [],
-      question: 0,
       correct: 0,
       total: 0
     };
@@ -41,7 +40,6 @@ class App extends Component {
   // Handle game selection from dropdown
   handleGameSel = e => {
     e.persist();
-    console.log(e.target.textContent);
     this.setState({
       gameSel: e.target.textContent
     });
@@ -92,18 +90,20 @@ class App extends Component {
       this.setState({
         gameSel: e.target.textContent,
         element: null,
+        correct: 0,
+        total: 0
       });
       if (e.target.textContent === "Quiz") {
-        this.setState({questions: this.chooseQuestions()})
+        this.setState({questions: this.chooseQuestions(5)})
       }
     };
 
   // Choose questions for quiz
-  chooseQuestions() {
+  chooseQuestions(num) {
     let els = [...this.state.elements]
     let questions = []
 
-    for (let i=0; i<20; i++) {
+    for (let i=0; i<num; i++) {
       let ind = Math.floor(Math.random() * els.length)
       let el = els.splice(ind, 1)
       questions.push(el[0])
@@ -115,31 +115,40 @@ class App extends Component {
 
   // Handle click of element
   handleElementClick = el => {
-    if (this.state.gameSel === "Quiz" && !this.state.element) {
-      this.setSelectedElement(el);
+    if (this.state.gameSel === "Quiz" && !this.state.element && this.state.questions.length > 0) {
+      this.setSelectedElement(el)
       this.evaluateAnswer(el)
+    } else if (this.state.gameSel === "Quiz" && !this.state.element && this.state.questions.length === 0) {
+      //
+    } else {
+      this.setSelectedElement(el)
     }
-  };
+  }
 
   setSelectedElement = el => {
-    this.setState({ element: el });
-  };
+    this.setState({ element: el })
+  }
 
   evaluateAnswer = (el) => {
     this.setState({total: this.state.total + 1})
-    if (el.number === this.state.questions[this.state.question].number) {
+    if (el.number === this.state.questions[0].number) {
       this.setState({correct: this.state.correct + 1})
     }
   }
 
   displayCurrentScore = () => {
-    return(`Current score: ${this.state.correct} out of ${this.state.total} (${(this.state.correct/this.state.total)*100}%)`)
+    return(`${this.state.correct}/${this.state.total}`)
+  }
+
+  displayPercent = () => {
+    return(`${Math.floor((this.state.correct/this.state.total)*100)}%`)
   }
 
   // Handle click of next button
   cycleQuestions = () => {
-    if (this.state.question != this.state.questions.length - 1) {
-      this.setState({question: this.state.question + 1})
+    if (this.state.questions.length > 0) {
+      let newQuestions = this.state.questions.slice(1)
+      this.setState({questions: newQuestions})
     }
     this.setSelectedElement(null)
   }
@@ -183,11 +192,12 @@ class App extends Component {
             <SideDisplay
               elements={this.state.questions}
               cycleQuestions={this.cycleQuestions}
-              question={this.state.questions[this.state.question]}
+              question={this.state.questions[0]}
               mode={this.state.gameSel}
               currentElement={this.state.element}
               setElement={this.setSelectedElement}
               currentScore={this.displayCurrentScore}
+              percent={this.displayPercent}
             />
           </div>
         </div>
