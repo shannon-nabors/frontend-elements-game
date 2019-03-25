@@ -19,6 +19,7 @@ const gameOptions = [
 const DropdownExampleSelection = props => (
   <Dropdown
     placeholder="Select Game"
+    id="dropDown"
     fluid
     search
     selection

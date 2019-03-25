@@ -1,5 +1,6 @@
 import React from 'react';
-import Question from './Question'
+import Question from '../components/Question'
+import Answer from '../components/Answer'
 
 class sideDisplay extends React.Component {
   render() {
@@ -7,6 +8,7 @@ class sideDisplay extends React.Component {
       <div className="sideDisplay">
           <div>
             <Question />
+            <Answer />
           </div>
       </div>
     );

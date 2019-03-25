@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Table from './containers/Table';
 import Navbar from './containers/NavBar';
 import ElementDetails from './components/ElementDetails';
-import SideDisplay from './components/sideDisplay';
+import SideDisplay from './containers/sideDisplay';
+import { Header } from 'semantic-ui-react';
 import './App.css';
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
     });
   };
 
+  // Handle game selection from dropdown
   handleGameSel = e => {
     e.persist();
     console.log(e.target.textContent);
@@ -92,6 +94,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header as="h1">Periodic Table Showdown</Header>
         <div className="ui grid">
           <div className="ui row">
             <div className="ui one wide column" />

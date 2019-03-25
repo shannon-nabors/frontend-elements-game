@@ -50,3 +50,30 @@
   margin-top: 52px;
   margin-right: 20px;
 }
+
+.question {
+  font: #aaa;
+  font-size: 1.3rem;
+  padding: 30px;
+  margin: 10px;
+}
+
+.answer {
+  font: #aaa;
+  font-size: 1.5rem;
+  padding: 30px;
+  margin: 10px;
+}
+
+#dropDown {
+  width: 20%;
+}
+
+.ansDisplay {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    background: rgb(176, 217, 250)
+}
