@@ -8,7 +8,7 @@ class NextButton extends React.Component {
         onClick={this.props.handleClick}
         id="next-button"
         >
-        Next Question
+        {this.props.elements.length > 1 ? "Next Question" : "SEE SCORE"}
       </Button>
     );
   }

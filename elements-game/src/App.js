@@ -3,6 +3,7 @@ import Table from './containers/Table';
 import Navbar from './containers/NavBar';
 import ElementDetails from './components/ElementDetails';
 import SideDisplay from './containers/SideDisplay';
+
 import { Header } from 'semantic-ui-react';
 import './App.css';
 
@@ -93,9 +94,9 @@ class App extends Component {
         correct: 0,
         total: 0
       });
-      if (e.target.textContent === "Quiz") {
-        this.setState({questions: this.chooseQuestions(5)})
-      }
+      // if (e.target.textContent === "Quiz") {
+      //   this.setState({questions: this.chooseQuestions(5)})
+      // }
     };
 
   // Choose questions for quiz
@@ -163,6 +164,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header as="h1">Periodic Table Showdown</Header>
+
         <div className="ui grid">
           <div className="ui row">
             <div className="ui one wide column" />
