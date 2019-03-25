@@ -16,7 +16,7 @@ code {
 #p-table {
   margin-top: 50px;
   margin-left: 3vw;
-  background-color: #FFEC2C;
+  background-color: #3843FF;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
 }
@@ -40,8 +40,6 @@ code {
   padding: 30% 0%;
 }
 
-
-
 #element-details {
   position: relative;
   top: 20%;
@@ -50,23 +48,10 @@ code {
   overflow-y: auto;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
-  background-color: #2196F3;
+  background-color: #3843FF;
   padding: 10px;
 }
 
