@@ -41,7 +41,6 @@ class App extends Component {
   // Handle game selection from dropdown
   handleGameSel = e => {
     e.persist();
-    console.log(e.target.textContent);
     this.setState({
       gameSel: e.target.textContent
     });
@@ -116,8 +115,10 @@ class App extends Component {
   // Handle click of element
   handleElementClick = el => {
     if (this.state.gameSel === "Quiz" && !this.state.element) {
-      this.setSelectedElement(el);
+      this.setSelectedElement(el)
       this.evaluateAnswer(el)
+    } else {
+      this.setSelectedElement(el)
     }
   };
 
