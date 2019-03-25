@@ -7,20 +7,21 @@ class Answer extends React.Component {
     return (
       <Card className="ui centered raised" id="answer">
 
-          <div className="header">
+          <div className="header" >
             {this.props.answer === this.props.selection ? "Correct!" : "Incorrect!"}
+            <br/>
             Current score: {this.props.currentScore()}
           </div>
-
+          <br/>
           <div className="header">
-            {name} ({symbol})
+          <p>{name} ({symbol})</p>
           </div>
 
           <div className="description">
-            <p>Atomic number: {number}</p>
-            <p>Atomic mass: {atomic_mass}</p>
+            Atomic number: {number}
+            <br/>
+            Atomic mass: {atomic_mass}
           </div>
-
       </Card>
     );
   }
