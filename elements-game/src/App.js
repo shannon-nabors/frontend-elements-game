@@ -119,8 +119,8 @@ class App extends Component {
       this.setSelectedElement(el)
       this.evaluateAnswer(el)
     } else if (this.state.gameSel === "Quiz" && !this.state.element && this.state.questions.length === 0) {
-      //
-    } else {
+
+    } else if (this.state.gameSel === "Learn"){
       this.setSelectedElement(el)
     }
   }
