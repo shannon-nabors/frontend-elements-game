@@ -5,7 +5,9 @@ class NextButton extends React.Component {
   render() {
     return (
       <Button
-        onClick={this.props.handleClick}>
+        onClick={this.props.handleClick}
+        className="next-button"
+        >
         Next Question
       </Button>
     );

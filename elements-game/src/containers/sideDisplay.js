@@ -7,7 +7,7 @@ class SideDisplay extends React.Component {
 
   render() {
     return (
-      <div className="side-display">
+      <div id="side-display">
           <div>
             {this.props.elements.length > 1?
               <Question

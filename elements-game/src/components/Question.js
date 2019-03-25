@@ -6,7 +6,7 @@ class Question extends React.Component {
     return (
       <Container>
         <div className="question">
-          <p>{this.props.question.name}</p>
+          <p>Click on the element named {this.props.question.name}</p>
         </div>
       </Container>
     );

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react';
+import {Card} from 'semantic-ui-react';
 
 class Answer extends React.Component {
   render() {
     let { number, symbol, atomic_mass, boil, category, discovered_by, melt, name, period, summary, spectral_img } = this.props.answer
     return (
-      <Container>
+      <Card className="ui centered raised">
         <div className="answer">
           <div className="header">
             {this.props.answer === this.props.selection ? "Correct!" : "Incorrect!"}
@@ -21,7 +21,7 @@ class Answer extends React.Component {
             <p>Atomic mass: {atomic_mass}</p>
           </div>
         </div>
-      </Container>
+      </Card>
     );
   }
 }
