@@ -31,7 +31,7 @@ class NavBar extends React.Component {
         />
 
         <Dropdown handleGameSel={handleGameSel}/>
-       
+
         <input
           type="button"
           className="ui item"

@@ -70,10 +70,27 @@ class App extends Component {
       ...blanks(20),
       ...this.state.elements.slice(56, 71),
       ...blanks(3),
-      ...this.state.elements.slice(88, 103)
+      ...this.state.elements.slice(88, 103),
+      ...blanks(1)
     ];
     return formattedElements;
   }
+
+  // Handle clicks in navbar
+    handleNavSel = e => {
+      console.log(e.target.name);
+      this.setState({
+        navSel: e.target.value
+      });
+    };
+
+    handleGameSel = (e) => {
+      this.setState({
+        gameSel: e.target.textContent,
+        element: null
+      });
+    };
+
 
   // Handle click of element
   handleElementClick = el => {

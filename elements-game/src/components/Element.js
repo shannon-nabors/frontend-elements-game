@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 
 class Element extends Component {
+
+  // formatID() {
+  //   return this.props.element.category.split(" ").join("-")
+  // }
+
   render() {
-    let { number, symbol } = this.props.element
+    let { number, symbol, category } = this.props.element
 
     return (
       <div
-        id={number < 120 ? "element" : "blank"}
+        className={number < 120 ? "element" : "blank"}
+        id={category}
         onClick={number < 120 ?
                  () => this.props.handleClick(this.props.element)
                  : null}

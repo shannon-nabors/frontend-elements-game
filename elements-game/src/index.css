@@ -15,14 +15,15 @@ code {
 
 #p-table {
   margin-top: 50px;
-  /* background-color: #19BB61; */
+  background-color: #19BB61;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+  /* height: 39vw; */
 }
 
-#element {
+.element {
   border: 2px solid white;
-  background-color: #19BB61;
+  /* background-color: #19BB61; */
   text-align: center;
   color: white;
   font-weight: bold;
@@ -30,11 +31,18 @@ code {
   padding: 30% 0%;
 }
 
-#blank {
+.element:hover {
+  transform: translate(0px, -1px);
+  /* background-color: #22FF84; */
+}
+
+.blank {
   border: 2px solid white;
   background-color: white;
   padding: 30% 0%;
 }
+
+
 
 #element-details {
   position: relative;
@@ -42,4 +50,63 @@ code {
   padding: 0em 1.5em 1.5em 1.5em;
   height: 50vh;
   overflow-y: auto;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+
+.grid-container {
+  display: inline-grid;
+}
+
+.sideDisplay {
+  background-color: #2196F3;
+  height: 38.4vw;
+  margin-top: 52px;
+  margin-right: 20px;
+}
+
+.question {
+  font: #aaa;
+  font-size: 1.3rem;
+  padding: 30px;
+  margin: 10px;
+}
+
+.answer {
+  font: #aaa;
+  font-size: 1.5rem;
+  padding: 30px;
+  margin: 10px;
+}
+
+#dropDown {
+  width: 20%;
+}
+
+.ansDisplay {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    background: rgb(176, 217, 250)
 }
