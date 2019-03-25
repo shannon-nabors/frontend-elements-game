@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f7f6
 }
 
 code {
@@ -136,10 +137,6 @@ code {
    height: 9vh;
    padding: 1.0rem;
    color: rgb(240, 89, 8)
- }
-
- body {
-   background-color: #f8f7f6
  }
 
  #activity-header{
