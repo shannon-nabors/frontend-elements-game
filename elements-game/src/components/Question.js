@@ -6,7 +6,7 @@ class Question extends React.Component {
     return (
       <Container>
         <div className="question">
-          <p>This is my question, what are your thoughts?</p>
+          <p>{this.props.question.name}</p>
         </div>
       </Container>
     );

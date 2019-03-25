@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Table from './containers/Table';
 import Navbar from './containers/NavBar';
 import ElementDetails from './components/ElementDetails';
-import SideDisplay from './containers/sideDisplay';
+import SideDisplay from './containers/SideDisplay';
 import { Header } from 'semantic-ui-react';
 import './App.css';
 
@@ -13,7 +13,11 @@ class App extends Component {
       elements: [],
       element: null,
       navSel: 'login',
-      gameSel: 'Learn'
+      gameSel: 'Learn',
+      questions: [],
+      question: 0,
+      correct: 0,
+      total: 0
     };
   }
 
@@ -87,20 +91,58 @@ class App extends Component {
     handleGameSel = (e) => {
       this.setState({
         gameSel: e.target.textContent,
-        element: null
+        element: null,
       });
+      if (e.target.textContent === "Quiz") {
+        this.setState({questions: this.chooseQuestions()})
+      }
     };
+
+  // Choose questions for quiz
+  chooseQuestions() {
+    let els = [...this.state.elements]
+    let questions = []
+
+    for (let i=0; i<20; i++) {
+      let ind = Math.floor(Math.random() * els.length)
+      let el = els.splice(ind, 1)
+      questions.push(el[0])
+    }
+
+    return questions
+  }
 
 
   // Handle click of element
   handleElementClick = el => {
-    this.setSelectedElement(el);
-    console.log(el);
+    if (this.state.gameSel === "Quiz" && !this.state.element) {
+      this.setSelectedElement(el);
+      this.evaluateAnswer(el)
+    }
   };
 
   setSelectedElement = el => {
     this.setState({ element: el });
   };
+
+  evaluateAnswer = (el) => {
+    this.setState({total: this.state.total + 1})
+    if (el.number === this.state.questions[this.state.question].number) {
+      this.setState({correct: this.state.correct + 1})
+    }
+  }
+
+  displayCurrentScore = () => {
+    return(`Current score: ${this.state.correct} out of ${this.state.total} (${(this.state.correct/this.state.total)*100}%)`)
+  }
+
+  // Handle click of next button
+  cycleQuestions = () => {
+    if (this.state.question != this.state.questions.length - 1) {
+      this.setState({question: this.state.question + 1})
+    }
+    this.setSelectedElement(null)
+  }
 
   // Handle click outside of modal
   handleModalExit = () => {
@@ -130,7 +172,7 @@ class App extends Component {
               elements={this.formatElementsForTable()}
               handleClick={this.handleElementClick}
             />
-            {this.state.element ? (
+            {this.state.element && this.state.gameSel === "Learn" ? (
               <ElementDetails
                 element={this.state.element}
                 exit={this.handleModalExit}
@@ -138,7 +180,15 @@ class App extends Component {
             ) : null}
           </div>
           <div className="ui four wide column">
-            <SideDisplay />
+            <SideDisplay
+              elements={this.state.questions}
+              cycleQuestions={this.cycleQuestions}
+              question={this.state.questions[this.state.question]}
+              mode={this.state.gameSel}
+              currentElement={this.state.element}
+              setElement={this.setSelectedElement}
+              currentScore={this.displayCurrentScore}
+            />
           </div>
         </div>
       </div>
