@@ -2,6 +2,7 @@ import React from 'react';
 import Question from '../components/Question'
 import Answer from '../components/Answer'
 import NextButton from '../components/NextButton'
+import ScorePanel from '../components/ScorePanel'
 
 class SideDisplay extends React.Component {
 
@@ -20,6 +21,7 @@ class SideDisplay extends React.Component {
                   />}
             {this.props.mode !== "Learn" && this.props.currentElement && <NextButton
               handleClick={this.props.cycleQuestions}/>}
+            {this.props.mode !== "Learn" && this.props.elements.length === 0 && <ScorePanel currentScore={this.props.currentScore} percent={this.props.percent}/>}
           </div>
       </div>
     );

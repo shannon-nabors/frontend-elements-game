@@ -94,16 +94,16 @@ class App extends Component {
         total: 0
       });
       if (e.target.textContent === "Quiz") {
-        this.setState({questions: this.chooseQuestions()})
+        this.setState({questions: this.chooseQuestions(5)})
       }
     };
 
   // Choose questions for quiz
-  chooseQuestions() {
+  chooseQuestions(num) {
     let els = [...this.state.elements]
     let questions = []
 
-    for (let i=0; i<5; i++) {
+    for (let i=0; i<num; i++) {
       let ind = Math.floor(Math.random() * els.length)
       let el = els.splice(ind, 1)
       questions.push(el[0])
@@ -119,16 +119,15 @@ class App extends Component {
       this.setSelectedElement(el)
       this.evaluateAnswer(el)
     } else if (this.state.gameSel === "Quiz" && !this.state.element && this.state.questions.length === 0) {
-      this.setSelectedElement(el)
-      this.setState({gameSel: "Learn"})
+      //
     } else {
       this.setSelectedElement(el)
     }
-  };
+  }
 
   setSelectedElement = el => {
-    this.setState({ element: el });
-  };
+    this.setState({ element: el })
+  }
 
   evaluateAnswer = (el) => {
     this.setState({total: this.state.total + 1})
@@ -138,7 +137,11 @@ class App extends Component {
   }
 
   displayCurrentScore = () => {
-    return(`Current score: ${this.state.correct} out of ${this.state.total} (${(this.state.correct/this.state.total)*100}%)`)
+    return(`${this.state.correct}/${this.state.total}`)
+  }
+
+  displayPercent = () => {
+    return(`${Math.floor((this.state.correct/this.state.total)*100)}%`)
   }
 
   // Handle click of next button
@@ -194,6 +197,7 @@ class App extends Component {
               currentElement={this.state.element}
               setElement={this.setSelectedElement}
               currentScore={this.displayCurrentScore}
+              percent={this.displayPercent}
             />
           </div>
         </div>
