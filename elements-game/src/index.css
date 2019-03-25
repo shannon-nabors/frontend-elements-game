@@ -15,16 +15,14 @@ code {
 
 #p-table {
   margin-top: 50px;
+  margin-left: 3vw;
   background-color: #FFEC2C;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
-  /* height: 39vw; */
-  /* rgb(248, 241, 159); */
 }
 
 .element {
   border: 2px solid white;
-  /* background-color: #FFEC2C; */
   text-align: center;
   color: white;
   font-weight: bold;
@@ -34,7 +32,6 @@ code {
 
 .element:hover {
   transform: translate(0px, -1px);
-  /* background-color: #22FF84; */
 }
 
 .blank {
@@ -77,30 +74,32 @@ code {
 .grid-container {
   display: inline-grid;
 }
+
 #side-display {
   background-color: #3843FF;
-  height: 38.4vw;
+  width: 20vw;
+  /* height: 38.4vw; */
   margin-top: 52px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 
 /* #a8acfc */
 
 
 .question {
-  font: #aaa;
+  /* font: #aaa;
   left: 30%;
-  font-size: 1.3rem;
+  font-size: 1.3rem; */
   padding: 30px;
   margin: 10px;
 }
 
-.answer {
-  position: relative;
-  font-size: 1.5rem;
-  padding: 40px;
-  margin: 10px;
-  background: #FFD16C
+#answer {
+  width: 18vw;
+  /* font-size: 1.5rem; */
+  padding: 1vw;
+  margin-left: 1vw;
+  /* background: #FFD16C */
 }
 
 #dropDown {
@@ -116,8 +115,9 @@ code {
     background: #FFD16C
 }
 
-.next-button{
-  position: absolute;
-  bottom: 10%;
-  right: 40%;
+#next-button{
+  margin-left: 1vw;
+  margin-bottom: 3vw;
+  /* bottom: 10%;
+  right: 40%; */
 }

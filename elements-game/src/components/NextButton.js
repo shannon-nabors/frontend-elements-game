@@ -6,7 +6,7 @@ class NextButton extends React.Component {
     return (
       <Button
         onClick={this.props.handleClick}
-        className="next-button"
+        id="next-button"
         >
         Next Question
       </Button>

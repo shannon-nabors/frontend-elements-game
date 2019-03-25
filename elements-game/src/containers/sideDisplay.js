@@ -1,4 +1,5 @@
 import React from 'react';
+import {Card} from 'semantic-ui-react'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
 import NextButton from '../components/NextButton'
@@ -8,12 +9,14 @@ class SideDisplay extends React.Component {
 
   render() {
     return (
-      <div id="side-display">
-          <div>
+      <Card id="side-display">
+          <div className="ui header">
             {this.props.mode !== "Learn" && this.props.elements.length > 0 &&
               <Question
                 question={this.props.question}/>
             }
+          </div>
+          <div className="ui description">
             {this.props.mode !== "Learn" && this.props.currentElement && <Answer
                      answer={this.props.question}
                      selection={this.props.currentElement}
@@ -23,7 +26,7 @@ class SideDisplay extends React.Component {
               handleClick={this.props.cycleQuestions}/>}
             {this.props.mode !== "Learn" && this.props.elements.length === 0 && <ScorePanel currentScore={this.props.currentScore} percent={this.props.percent}/>}
           </div>
-      </div>
+      </Card>
     );
   }
 }

@@ -175,8 +175,7 @@ class App extends Component {
             </div>
           </div>
 
-          <div className="ui one wide column" />
-          <div className="ui eleven wide column">
+          <div className="ui twelve wide column">
             <Table
               elements={this.formatElementsForTable()}
               handleClick={this.handleElementClick}
