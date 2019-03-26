@@ -1,38 +1,43 @@
-import React from 'react';
-import Dropdown from '../components/Dropdown'
+import React, { Component } from 'react';
+import { Menu, Container, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import Dropdown from '../components/Dropdown';
 
-class NavBar extends React.Component {
-
+class NavBar extends Component {
   render() {
     const { handleNavSel, handleGameSel } = this.props;
+
     return (
-      <div className="ui secondary  menu">
+      <div id="nav-bar">
+        <Container>
+          <Menu secondary stackable widths={4}>
+            <Menu.Item
+              as={Link}
+              to="/periodic_table"
+              name="periodic_table"
+              onClick={handleNavSel}
+            >
+              Periodic Table
+            </Menu.Item>
 
-        <input
-          type="button"
-          className="item active"
-          value="Periodic Table"
-          name="periodic"
-          onClick={handleNavSel}
-        />
-        <input
-          type="button"
-          className="item"
-          value="Scores"
-          name="score"
-          onClick={handleNavSel}
-        />
+            <Menu.Item
+              as={Link}
+              to="/scores"
+              name="score"
+              onClick={handleNavSel}
+            >
+              Scores
+            </Menu.Item>
 
-        <Dropdown handleGameSel={handleGameSel}/>
+            <Menu.Item>
+              <Dropdown handleGameSel={handleGameSel} />
+            </Menu.Item>
 
-        <input
-          type="button"
-          className="ui item"
-          value="Logout"
-          name="logout"
-          onClick={handleNavSel}
-        />
-
+            <Menu.Item name="logout" as={Link}>
+              Logout
+            </Menu.Item>
+          </Menu>
+        </Container>
       </div>
     );
   }

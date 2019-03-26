@@ -1,18 +1,16 @@
-import React, { Component } from 'react'
-import { Header } from 'semantic-ui-react'
-import { Route, Switch } from 'react-router-dom'
-//
-import Login from './components/LoginForm'
-import Create from './components/CreateUser'
-//
-import QuizPage from './containers/QuizPage'
-//
-import ElementDetails from './components/ElementDetails'
-
+import React, { Component } from 'react';
+import { Header } from 'semantic-ui-react';
+import { Route, Switch } from 'react-router-dom';
+import Login from './components/LoginForm';
+import Create from './components/CreateUser';
+import QuizPage from './containers/QuizPage';
+import ElementDetails from './components/ElementDetails';
+import ScorePanel from './components/ScorePanel';
+import ScoresTable from './components/ScoresTable';
 
 class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       elements: [],
       element: null,
@@ -23,7 +21,7 @@ class App extends Component {
       total: 0,
       currentUser: null,
       currentScores: []
-    }
+    };
   }
 
   // Load all elements on mount
@@ -32,36 +30,36 @@ class App extends Component {
       'https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/PeriodicTableJSON.json'
     )
       .then(res => res.json())
-      .then(elementsData => this.setState({ elements: elementsData.elements }))
+      .then(elementsData => this.setState({ elements: elementsData.elements }));
   }
 
   // Handle clicks in navbar
   handleNavSel = e => {
-    console.log(e.target.name)
+    console.log(e.target.name);
     this.setState({
       navSel: e.target.value
-    })
-  }
+    });
+  };
 
   // Handle game selection from dropdown
   handleGameSel = e => {
-    e.persist()
+    e.persist();
     this.setState({
       gameSel: e.target.textContent
-    })
-  }
+    });
+  };
 
   // Array for table element -- includes blank spaces for display
   formatElementsForTable = () => {
-    let blankKey = 120
+    let blankKey = 120;
     const blanks = number => {
-      let blanksArr = []
+      let blanksArr = [];
       for (let i = 0; i < number; i++) {
-        blanksArr.push({ number: blankKey })
-        blankKey++
+        blanksArr.push({ number: blankKey });
+        blankKey++;
       }
-      return blanksArr
-    }
+      return blanksArr;
+    };
 
     let formattedElements = [
       ...this.state.elements.slice(0, 1),
@@ -80,123 +78,137 @@ class App extends Component {
       ...blanks(3),
       ...this.state.elements.slice(88, 103),
       ...blanks(1)
-    ]
-    return formattedElements
-  }
+    ];
+    return formattedElements;
+  };
 
   // Handle clicks in navbar
-    handleNavSel = e => {
-      console.log(e.target.name)
-      this.setState({
-        navSel: e.target.value
-      })
-    }
+  handleNavSel = e => {
+    console.log(e.target.name);
+    this.setState({
+      navSel: e.target.value
+    });
+  };
 
-    handleGameSel = (e) => {
-      this.setState({
-        gameSel: e.target.textContent,
-        element: null,
-        correct: 0,
-        total: 0
-      })
-      if (e.target.textContent === "Quiz") {
-        this.setState({questions: this.chooseQuestions(5)})
-      }
+  handleGameSel = e => {
+    this.setState({
+      gameSel: e.target.textContent,
+      element: null,
+      correct: 0,
+      total: 0
+    });
+    if (e.target.textContent === 'Quiz') {
+      this.setState({ questions: this.chooseQuestions(5) });
     }
+  };
 
   // Choose questions for quiz
   chooseQuestions(num) {
-    let els = [...this.state.elements]
-    let questions = []
+    let els = [...this.state.elements];
+    let questions = [];
 
-    for (let i=0; i<num; i++) {
-      let ind = Math.floor(Math.random() * els.length)
-      let el = els.splice(ind, 1)
-      questions.push(el[0])
+    for (let i = 0; i < num; i++) {
+      let ind = Math.floor(Math.random() * els.length);
+      let el = els.splice(ind, 1);
+      questions.push(el[0]);
     }
 
-    return questions
+    return questions;
   }
-
 
   // Handle click of element
   handleElementClick = el => {
-    if (this.state.gameSel === "Quiz" && !this.state.element && this.state.questions.length > 0) {
-      this.setSelectedElement(el)
-      this.evaluateAnswer(el)
-    } else if (this.state.gameSel === "Quiz" && !this.state.element && this.state.questions.length === 0) {
-
-    } else if (this.state.gameSel === "Learn"){
-      this.setSelectedElement(el)
+    if (
+      this.state.gameSel === 'Quiz' &&
+      !this.state.element &&
+      this.state.questions.length > 0
+    ) {
+      this.setSelectedElement(el);
+      this.evaluateAnswer(el);
+    } else if (
+      this.state.gameSel === 'Quiz' &&
+      !this.state.element &&
+      this.state.questions.length === 0
+    ) {
+    } else if (this.state.gameSel === 'Learn') {
+      this.setSelectedElement(el);
     }
-  }
+  };
 
   setSelectedElement = el => {
-    this.setState({ element: el })
-  }
+    this.setState({ element: el });
+  };
 
-  evaluateAnswer = (el) => {
-    this.setState({total: this.state.total + 1})
+  evaluateAnswer = el => {
+    this.setState({ total: this.state.total + 1 });
     if (el.number === this.state.questions[0].number) {
-      this.setState({correct: this.state.correct + 1})
+      this.setState({ correct: this.state.correct + 1 });
     }
-  }
+  };
 
   displayCurrentScore = () => {
-    return(`${this.state.correct}/${this.state.total}`)
-  }
+    return `${this.state.correct}/${this.state.total}`;
+  };
 
   displayPercent = () => {
-    return(`${Math.floor((this.state.correct/this.state.total)*100)}%`)
-  }
+    return `${Math.floor((this.state.correct / this.state.total) * 100)}%`;
+  };
 
   // Handle click of next button
   cycleQuestions = () => {
     if (this.state.questions.length > 0) {
-      let newQuestions = this.state.questions.slice(1)
-      this.setState({questions: newQuestions})
+      let newQuestions = this.state.questions.slice(1);
+      this.setState({ questions: newQuestions });
     }
-    this.setSelectedElement(null)
-  }
+    this.setSelectedElement(null);
+  };
 
   // Handle click outside of modal
   handleModalExit = () => {
-    this.setState({ element: null })
-  }
+    this.setState({ element: null });
+  };
 
   // Handle login
-  updateUserInfo = (userData) => {
+  updateUserInfo = userData => {
     this.setState({
       currentUser: userData.user,
       currentScores: userData.scores
-    })
-  }
-
+    });
+  };
 
   // Render page
   render() {
     return (
       <div className="App">
-        <Header id="header" as="h1">Elemental Turn-up</Header>
+        <Header id="header" as="h1">
+          Elemental Turn-up
+        </Header>
 
         <Switch>
           <Route
             path="/periodic_table"
-            render= {() => <QuizPage
-              gameSel={this.state.gameSel}
-              handleGameSel={this.handleGameSel}
-              handleNavSel={this.handleNavSel}
-              formatElementsForTable={this.formatElementsForTable}
-              handleElementClick={this.handleElementClick}
-              element={this.state.element}
-              handleModalExit={this.handleModalExit}
-              questions={this.state.questions}
-              cycleQuestions={this.cycleQuestions}
-              question={this.state.questions[0]}
-              setSelectedElement={this.setSelectedElement}
-              displayCurrentScore={this.displayCurrentScore}
-              displayPercent={this.displayPercent}
-            />}
+            render={() => (
+              <QuizPage
+                gameSel={this.state.gameSel}
+                handleGameSel={this.handleGameSel}
+                handleNavSel={this.handleNavSel}
+                formatElementsForTable={this.formatElementsForTable}
+                handleElementClick={this.handleElementClick}
+                element={this.state.element}
+                handleModalExit={this.handleModalExit}
+                questions={this.state.questions}
+                cycleQuestions={this.cycleQuestions}
+                question={this.state.questions[0]}
+                setSelectedElement={this.setSelectedElement}
+                displayCurrentScore={this.displayCurrentScore}
+                displayPercent={this.displayPercent}
+              />
+            )}
+          />
+
+          <Route
+            path="/scores"
+            render={() => <ScoresTable scores={this.state.CurrentScores} />}
           />
         </Switch>
       </div>
@@ -204,4 +216,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;
