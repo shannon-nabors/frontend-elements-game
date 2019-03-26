@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Button, Form, Container, Header } from 'semantic-ui-react'
+import { Link, Redirect } from 'react-router-dom'
 
 class Login extends Component {
   state = {
-    username: ""
+    username: "",
+    redirect: false
   }
 
   handleChange = (e, { name, value }) => {
@@ -21,10 +23,18 @@ class Login extends Component {
     		username: this.state.username,
     	})
     }).then(res => res.json())
-    .then(data => this.props.update(data))
+    .then(data => {
+      this.props.update(data)
+      this.setState({redirect: true})
+    })
   }
 
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect to="/periodic_table"/>
+    }
+
     return(
       <Container className="ui attached segment" id="form-area">
         <Header as='h3'>Log in</Header>
@@ -39,9 +49,9 @@ class Login extends Component {
         </Form>
         <br></br>
         <br></br>
-        <div className="fluid ui button">
+        <Link to="/create_account" className="fluid ui button">
         New user? Create an account
-        </div>
+        </Link>
       </Container>
     )
   }

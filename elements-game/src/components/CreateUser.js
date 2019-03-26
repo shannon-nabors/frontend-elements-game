@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Button, Form, Container, Header } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
 
 class CreateUser extends Component {
   state = {
     username: "",
     first_name: "",
-    last_name: ""
+    last_name: "",
+    redirect: false
   }
 
   handleChange = (e, { name, value }) => {
@@ -25,10 +27,18 @@ class CreateUser extends Component {
         last_name: this.state.last_name
     	})
     }).then(res => res.json())
-    .then(data => this.props.update(data))
+    .then(data => {
+      this.props.update(data)
+      this.setState({redirect: true})
+    })
   }
 
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect to="/periodic_table"/>
+    }
+
     return(
       <Container id="form-area">
         <Header as='h3'>Create an account</Header>

@@ -11,6 +11,7 @@ class ScorePanel extends React.Component {
         <p>Your score:</p>
         <p>{this.props.currentScore()}</p>
         <p>{this.props.percent()}</p>
+        <Button onClick={this.props.resetQuiz}>Play Again</Button>
       </Fragment>
     )
   }

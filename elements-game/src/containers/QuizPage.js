@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import NavBar from './NavBar'
 import Table from './Table'
 import SideDisplay from './SideDisplay'
@@ -7,6 +8,11 @@ import ElementDetails from '../components/ElementDetails'
 class QuizPage extends Component {
 
   render() {
+
+    if (!this.props.loggedIn) {
+      return <Redirect to="/"/>
+    }
+
     return (
       <div className="ui grid">
 
@@ -16,6 +22,8 @@ class QuizPage extends Component {
               gameSel={this.props.gameSel}
               handleGameSel={this.props.handleGameSel}
               handleNavSel={this.props.handleNavSel}
+              user={this.props.user}
+              logout={this.props.logout}
             />
           </div>
         </div>
@@ -42,6 +50,8 @@ class QuizPage extends Component {
             setElement={this.props.setSelectedElement}
             currentScore={this.props.displayCurrentScore}
             percent={this.props.displayPercent}
+            update={this.props.updateUserScores}
+            resetQuiz={this.props.resetQuiz}
           />
         </div>
       </div>

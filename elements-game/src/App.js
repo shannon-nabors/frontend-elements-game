@@ -19,9 +19,10 @@ class App extends Component {
       questions: [],
       correct: 0,
       total: 0,
-      currentUser: null,
-      currentScores: []
-    };
+      currentUser: {first_name: "Guest"},
+      currentScores: [],
+      loggedIn: false
+    }
   }
 
   // Load all elements on mount
@@ -72,8 +73,8 @@ class App extends Component {
       ...blanks(1),
       ...this.state.elements.slice(71, 88),
       ...blanks(1),
-      ...this.state.elements.slice(103, 118),
-      ...blanks(20),
+      ...this.state.elements.slice(103, 119),
+      ...blanks(19),
       ...this.state.elements.slice(56, 71),
       ...blanks(3),
       ...this.state.elements.slice(88, 103),
@@ -102,7 +103,7 @@ class App extends Component {
     }
   };
 
-  // Choose questions for quiz
+  // Set up quiz
   chooseQuestions(num) {
     let els = [...this.state.elements];
     let questions = [];
@@ -116,22 +117,31 @@ class App extends Component {
     return questions;
   }
 
+  resetQuiz = () => {
+    this.setState({
+      element: null,
+      correct: 0,
+      total: 0
+    })
+    if (this.state.gameSel === "Quiz") {
+      this.setState({questions: this.chooseQuestions(5)})
+    }
+  }
+
+
   // Handle click of element
   handleElementClick = el => {
-    if (
-      this.state.gameSel === 'Quiz' &&
-      !this.state.element &&
-      this.state.questions.length > 0
-    ) {
-      this.setSelectedElement(el);
-      this.evaluateAnswer(el);
-    } else if (
-      this.state.gameSel === 'Quiz' &&
-      !this.state.element &&
-      this.state.questions.length === 0
-    ) {
-    } else if (this.state.gameSel === 'Learn') {
-      this.setSelectedElement(el);
+    if (this.state.gameSel === "Quiz"
+    && !this.state.element
+    && this.state.questions.length > 0) {
+      this.setSelectedElement(el)
+      this.evaluateAnswer(el)
+    } else if (this.state.gameSel === "Quiz"
+    && !this.state.element
+    && this.state.questions.length === 0) {
+      //
+    } else if (this.state.gameSel === "Learn"){
+      this.setSelectedElement(el)
     }
   };
 
@@ -163,6 +173,29 @@ class App extends Component {
     this.setSelectedElement(null);
   };
 
+  updateUserScores = () => {
+    this.cycleQuestions()
+    fetch('http://localhost:3000/scores', {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json",
+        "Accept": "application/json"
+      },
+    	body:JSON.stringify({
+    		user_id: this.state.currentUser.id,
+        mode: this.state.gameSel,
+        correct: this.state.correct,
+        total: this.state.total
+    	})
+    }).then(res => res.json())
+    .then(score => {
+      let newScores = [...this.state.currentScores, score]
+      this.setState({
+        currentScores: newScores
+      })
+    })
+  }
+
   // Handle click outside of modal
   handleModalExit = () => {
     this.setState({ element: null });
@@ -172,9 +205,19 @@ class App extends Component {
   updateUserInfo = userData => {
     this.setState({
       currentUser: userData.user,
-      currentScores: userData.scores
-    });
-  };
+      currentScores: userData.scores,
+      loggedIn: true
+    })
+  }
+
+  // Handle logout
+  handleLogout = () => {
+    this.setState({
+      currentUser: {first_name: "Guest"},
+      loggedIn: false
+    })
+  }
+
 
   // Render page
   render() {
@@ -187,28 +230,33 @@ class App extends Component {
         <Switch>
           <Route
             path="/periodic_table"
-            render={() => (
-              <QuizPage
-                gameSel={this.state.gameSel}
-                handleGameSel={this.handleGameSel}
-                handleNavSel={this.handleNavSel}
-                formatElementsForTable={this.formatElementsForTable}
-                handleElementClick={this.handleElementClick}
-                element={this.state.element}
-                handleModalExit={this.handleModalExit}
-                questions={this.state.questions}
-                cycleQuestions={this.cycleQuestions}
-                question={this.state.questions[0]}
-                setSelectedElement={this.setSelectedElement}
-                displayCurrentScore={this.displayCurrentScore}
-                displayPercent={this.displayPercent}
-              />
-            )}
+            render= {() => <QuizPage
+              gameSel={this.state.gameSel}
+              handleGameSel={this.handleGameSel}
+              handleNavSel={this.handleNavSel}
+              formatElementsForTable={this.formatElementsForTable}
+              handleElementClick={this.handleElementClick}
+              element={this.state.element}
+              handleModalExit={this.handleModalExit}
+              questions={this.state.questions}
+              cycleQuestions={this.cycleQuestions}
+              question={this.state.questions[0]}
+              setSelectedElement={this.setSelectedElement}
+              displayCurrentScore={this.displayCurrentScore}
+              displayPercent={this.displayPercent}
+              user={this.state.currentUser}
+              loggedIn={this.state.loggedIn}
+              logout={this.handleLogout}
+              updateUserScores={this.updateUserScores}
+              resetQuiz={this.resetQuiz}
+            />}
           />
-
           <Route
-            path="/scores"
-            render={() => <ScoresTable scores={this.state.CurrentScores} />}
+            path="/create_account"
+            render={() => <Create update={this.updateUserInfo}/>}
+          />
+          <Route
+            render={() => <Login update={this.updateUserInfo}/>}
           />
         </Switch>
       </div>
