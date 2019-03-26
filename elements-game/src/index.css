@@ -23,11 +23,12 @@ code {
 
 .element {
   border: 2px solid #f8f7f6;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  font-size: 1.5vmax;
-  padding: 30% 0%;
+   text-align: center;
+   background-color: #3843FF;
+   color: white;
+   font-weight: bold;
+   font-size: 1.5vmax;
+   padding: 30% 0%;
 }
 
 .element:hover {
