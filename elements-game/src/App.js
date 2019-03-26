@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from './containers/Table';
 import Navbar from './containers/NavBar';
+import Login from './components/LoginForm'
 import ElementDetails from './components/ElementDetails';
 import SideDisplay from './containers/SideDisplay'
 import { Header } from 'semantic-ui-react';
@@ -16,7 +17,9 @@ class App extends Component {
       gameSel: 'Learn',
       questions: [],
       correct: 0,
-      total: 0
+      total: 0,
+      currentUser: null,
+      currentScores: []
     };
   }
 
@@ -158,47 +161,21 @@ class App extends Component {
     this.setState({ element: null });
   };
 
+  // Handle login
+  updateUserInfo = (userData) => {
+    this.setState({
+      currentUser: userData.user,
+      currentScores: userData.scores
+    })
+  }
+
+
   // Render page
   render() {
     return (
       <div className="App">
-        <Header id="header" as="h1">Periodic Table Showdown</Header>
-        <div className="ui grid">
-          <div className="ui row">
-            <div className="ui twelve wide column">
-              <Navbar
-                gameSel={this.state.gameSel}
-                handleGameSel={this.handleGameSel}
-                handleNavSel={this.handleNavSel}
-              />
-            </div>
-          </div>
-
-          <div id="nav-bar" className="ui twelve wide column background">
-            <Table
-              elements={this.formatElementsForTable()}
-              handleClick={this.handleElementClick}
-            />
-            {this.state.element && this.state.gameSel === "Learn" ? (
-              <ElementDetails
-                element={this.state.element}
-                exit={this.handleModalExit}
-              />
-            ) : null}
-          </div>
-          <div className="ui four wide column">
-            <SideDisplay
-              elements={this.state.questions}
-              cycleQuestions={this.cycleQuestions}
-              question={this.state.questions[0]}
-              mode={this.state.gameSel}
-              currentElement={this.state.element}
-              setElement={this.setSelectedElement}
-              currentScore={this.displayCurrentScore}
-              percent={this.displayPercent}
-            />
-          </div>
-        </div>
+        <Header id="header" as="h1">Elemental Turn-up</Header>
+        <Login update={this.updateUserInfo}/>
       </div>
     );
   }

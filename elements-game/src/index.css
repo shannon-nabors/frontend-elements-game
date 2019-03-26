@@ -116,7 +116,7 @@ code {
  }
 
  #header{
-   background-color: rgb(108, 177, 255);  
+   background-color: rgb(108, 177, 255);
    font-family: 'Space Mono', monospace;
    font-size: 5vh;
    height: 9vh;
@@ -136,5 +136,7 @@ code {
    padding-left: 2vh
  }
 
- /* rgb(127, 57, 201) */
-
+ #login-area{
+   margin-top: 50px;
+   width: 50vw;
+ }
