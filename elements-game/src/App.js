@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Table from './containers/Table';
 import Navbar from './containers/NavBar';
 import Login from './components/LoginForm'
+import Create from './components/CreateUser'
 import ElementDetails from './components/ElementDetails';
 import SideDisplay from './containers/SideDisplay'
 import { Header } from 'semantic-ui-react';
@@ -175,7 +176,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header id="header" as="h1">Elemental Turn-up</Header>
-        <Login update={this.updateUserInfo}/>
+        <Create update={this.updateUserInfo}/>
       </div>
     );
   }
