@@ -105,7 +105,7 @@ class App extends Component {
       }
     }
 
-  // Choose questions for quiz
+  // Set up quiz
   chooseQuestions(num) {
     let els = [...this.state.elements]
     let questions = []
@@ -119,14 +119,29 @@ class App extends Component {
     return questions
   }
 
+  resetQuiz = () => {
+    this.setState({
+      element: null,
+      correct: 0,
+      total: 0
+    })
+    if (this.state.gameSel === "Quiz") {
+      this.setState({questions: this.chooseQuestions(5)})
+    }
+  }
+
 
   // Handle click of element
   handleElementClick = el => {
-    if (this.state.gameSel === "Quiz" && !this.state.element && this.state.questions.length > 0) {
+    if (this.state.gameSel === "Quiz"
+    && !this.state.element
+    && this.state.questions.length > 0) {
       this.setSelectedElement(el)
       this.evaluateAnswer(el)
-    } else if (this.state.gameSel === "Quiz" && !this.state.element && this.state.questions.length === 0) {
-
+    } else if (this.state.gameSel === "Quiz"
+    && !this.state.element
+    && this.state.questions.length === 0) {
+      //
     } else if (this.state.gameSel === "Learn"){
       this.setSelectedElement(el)
     }
@@ -158,6 +173,29 @@ class App extends Component {
       this.setState({questions: newQuestions})
     }
     this.setSelectedElement(null)
+  }
+
+  updateUserScores = () => {
+    this.cycleQuestions()
+    fetch('http://localhost:3000/scores', {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json",
+        "Accept": "application/json"
+      },
+    	body:JSON.stringify({
+    		user_id: this.state.currentUser.id,
+        mode: this.state.gameSel,
+        correct: this.state.correct,
+        total: this.state.total
+    	})
+    }).then(res => res.json())
+    .then(score => {
+      let newScores = [...this.state.currentScores, score]
+      this.setState({
+        currentScores: newScores
+      })
+    })
   }
 
   // Handle click outside of modal
@@ -209,6 +247,8 @@ class App extends Component {
               user={this.state.currentUser}
               loggedIn={this.state.loggedIn}
               logout={this.handleLogout}
+              updateUserScores={this.updateUserScores}
+              resetQuiz={this.resetQuiz}
             />}
           />
           <Route

@@ -19,14 +19,18 @@ class SideDisplay extends React.Component {
           }
         </div>
         <div className="ui description">
+
           {this.props.mode !== "Learn" && this.props.currentElement && <Answer
             answer={this.props.question}
             selection={this.props.currentElement}
             currentScore={this.props.currentScore}
           />}
+
+          {this.props.mode !== "Learn" && this.props.elements.length === 0 && <ScorePanel currentScore={this.props.currentScore} percent={this.props.percent} resetQuiz={this.props.resetQuiz}/>}
+
           {this.props.mode !== "Learn" && this.props.currentElement && <NextButton
-            handleClick={this.props.cycleQuestions} />}
-          {this.props.mode !== "Learn" && this.props.elements.length === 0 && <ScorePanel currentScore={this.props.currentScore} percent={this.props.percent} />}
+            handleClick={this.props.cycleQuestions} remaining={this.props.elements.length} update={this.props.update}/>}
+
         </div>
       </Card>
     );

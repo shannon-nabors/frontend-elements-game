@@ -50,6 +50,8 @@ class QuizPage extends Component {
             setElement={this.props.setSelectedElement}
             currentScore={this.props.displayCurrentScore}
             percent={this.props.displayPercent}
+            update={this.props.updateUserScores}
+            resetQuiz={this.props.resetQuiz}
           />
         </div>
       </div>
