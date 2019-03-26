@@ -22,7 +22,8 @@ class App extends Component {
       correct: 0,
       total: 0,
       currentUser: {first_name: "Guest"},
-      currentScores: []
+      currentScores: [],
+      loggedIn: false
     }
   }
 
@@ -168,7 +169,16 @@ class App extends Component {
   updateUserInfo = (userData) => {
     this.setState({
       currentUser: userData.user,
-      currentScores: userData.scores
+      currentScores: userData.scores,
+      loggedIn: true
+    })
+  }
+
+  // Handle logout
+  handleLogout = () => {
+    this.setState({
+      currentUser: {first_name: "Guest"},
+      loggedIn: false
     })
   }
 
@@ -197,6 +207,8 @@ class App extends Component {
               displayCurrentScore={this.displayCurrentScore}
               displayPercent={this.displayPercent}
               user={this.state.currentUser}
+              loggedIn={this.state.loggedIn}
+              logout={this.handleLogout}
             />}
           />
           <Route

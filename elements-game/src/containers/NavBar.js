@@ -30,7 +30,7 @@ class NavBar extends React.Component {
           className="ui item"
           value="Logout"
           name="logout"
-          onClick={handleNavSel}
+          onClick={this.props.logout}
         />
 
       </div>
