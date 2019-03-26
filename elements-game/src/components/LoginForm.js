@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Container, Header } from 'semantic-ui-react'
+import { Button, Form, Container, Header, Message } from 'semantic-ui-react'
 import { Link, Redirect } from 'react-router-dom'
 
 class Login extends Component {
@@ -38,12 +38,17 @@ class Login extends Component {
     return(
       <Container className="ui attached segment" id="form-area">
         <Header as='h3'>Log in</Header>
-        <Form onSubmit={this.handleSubmit}>
+        <Form  onSubmit={this.handleSubmit}>
           <Form.Input
             name="username"
             placeholder="Username"
             onChange={this.handleChange}
             value={this.state.username}
+          />
+          <Message
+            error
+            header="Username incorrect"
+            content="No user exists with that username"
           />
           <Button type="submit">Log in</Button>
         </Form>
