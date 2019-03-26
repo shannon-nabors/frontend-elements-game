@@ -41,7 +41,6 @@ class NavBar extends Component {
             <Menu.Item
               className="ui item"
               name="logout"
-              type="button"
               onClick={this.props.logout}
             >
               Logout
