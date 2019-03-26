@@ -179,22 +179,26 @@ class App extends Component {
       <div className="App">
         <Header id="header" as="h1">Elemental Turn-up</Header>
 
-        <QuizPage
-          gameSel={this.state.gameSel}
-          handleGameSel={this.handleGameSel}
-          handleNavSel={this.handleNavSel}
-          formatElementsForTable={this.formatElementsForTable}
-          handleElementClick={this.handleElementClick}
-          element={this.state.element}
-          handleModalExit={this.handleModalExit}
-          questions={this.state.questions}
-          cycleQuestions={this.cycleQuestions}
-          question={this.state.questions[0]}
-          setSelectedElement={this.setSelectedElement}
-          displayCurrentScore={this.displayCurrentScore}
-          displayPercent={this.displayPercent}
-        />
-
+        <Switch>
+          <Route
+            path="/periodic_table"
+            render= {() => <QuizPage
+              gameSel={this.state.gameSel}
+              handleGameSel={this.handleGameSel}
+              handleNavSel={this.handleNavSel}
+              formatElementsForTable={this.formatElementsForTable}
+              handleElementClick={this.handleElementClick}
+              element={this.state.element}
+              handleModalExit={this.handleModalExit}
+              questions={this.state.questions}
+              cycleQuestions={this.cycleQuestions}
+              question={this.state.questions[0]}
+              setSelectedElement={this.setSelectedElement}
+              displayCurrentScore={this.displayCurrentScore}
+              displayPercent={this.displayPercent}
+            />}
+          />
+        </Switch>
       </div>
     );
   }
