@@ -145,3 +145,8 @@ code {
    border: 1px solid lightgray;
    border-radius: 10px;
  }
+
+ .table-heading{
+   font-family: 'Space Mono', monospace;
+   font: 2.5vh;
+ }

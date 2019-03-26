@@ -6,7 +6,7 @@ import Create from './components/CreateUser';
 import QuizPage from './containers/QuizPage';
 import ElementDetails from './components/ElementDetails';
 import ScorePanel from './components/ScorePanel';
-import ScoresTable from './components/ScoresTable';
+import ScoresTable from './containers/ScoresTable';
 
 class App extends Component {
   constructor() {
@@ -254,6 +254,18 @@ class App extends Component {
           <Route
             path="/create_account"
             render={() => <Create update={this.updateUserInfo}/>}
+          />
+          <Route
+            path="/scores"
+            render={() => <ScoresTable
+              currentUser={this.state.currentUser}
+              currentScores={this.state.currentScores}
+              gameSel={this.state.gameSel}
+              handleGameSel={this.handleGameSel}
+              handleNavSel={this.handleNavSel}
+              user={this.state.currentUser}
+              logout={this.handleLogout}
+            />}
           />
           <Route
             render={() => <Login update={this.updateUserInfo}/>}

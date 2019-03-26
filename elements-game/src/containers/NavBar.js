@@ -54,11 +54,3 @@ class NavBar extends Component {
 }
 
 export default NavBar;
-
-{/* <input
-  type="button"
-  className="ui item"
-  value="Logout"
-  name="logout"
-  onClick={this.props.logout}
-/> */}
