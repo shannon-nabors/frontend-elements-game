@@ -5,7 +5,8 @@ import { Link, Redirect } from 'react-router-dom'
 class Login extends Component {
   state = {
     username: "",
-    redirect: false
+    redirect: false,
+    failed: false
   }
 
   handleChange = (e, { name, value }) => {
@@ -24,8 +25,12 @@ class Login extends Component {
     	})
     }).then(res => res.json())
     .then(data => {
-      this.props.update(data)
-      this.setState({redirect: true})
+      if (!data.error) {
+        this.props.update(data)
+        this.setState({redirect: true})
+      } else {
+        this.setState({failed: true})
+      }
     })
   }
 
@@ -38,7 +43,7 @@ class Login extends Component {
     return(
       <Container className="ui attached segment" id="form-area">
         <Header as='h3'>Log in</Header>
-        <Form  onSubmit={this.handleSubmit}>
+        <Form error={this.state.failed} onSubmit={this.handleSubmit}>
           <Form.Input
             name="username"
             placeholder="Username"
