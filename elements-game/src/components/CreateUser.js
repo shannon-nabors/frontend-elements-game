@@ -30,7 +30,7 @@ class CreateUser extends Component {
 
   render() {
     return(
-      <Container id="login-area">
+      <Container id="form-area">
         <Header as='h3'>Create an account</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input

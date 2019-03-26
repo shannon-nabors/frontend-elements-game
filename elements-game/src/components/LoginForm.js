@@ -3,8 +3,7 @@ import { Button, Form, Container, Header } from 'semantic-ui-react'
 
 class Login extends Component {
   state = {
-    username: "",
-    password: ""
+    username: ""
   }
 
   handleChange = (e, { name, value }) => {
@@ -20,7 +19,6 @@ class Login extends Component {
       },
     	body:JSON.stringify({
     		username: this.state.username,
-    		password: this.state.password
     	})
     }).then(res => res.json())
     .then(data => this.props.update(data))
@@ -28,26 +26,22 @@ class Login extends Component {
 
   render() {
     return(
-      <Container id="login-area">
+      <Container className="ui attached segment" id="form-area">
         <Header as='h3'>Log in</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
-            label="username"
             name="username"
             placeholder="Username"
             onChange={this.handleChange}
             value={this.state.username}
           />
-          <Form.Input
-            type="password"
-            label="password"
-            name="password"
-            placeholder="Password"
-            onChange={this.handleChange}
-            value={this.state.password}
-          />
           <Button type="submit">Log in</Button>
         </Form>
+        <br></br>
+        <br></br>
+        <div className="fluid ui button">
+        New user? Create an account
+        </div>
       </Container>
     )
   }

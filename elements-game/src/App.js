@@ -176,7 +176,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header id="header" as="h1">Elemental Turn-up</Header>
-        <Create update={this.updateUserInfo}/>
+        <Login update={this.updateUserInfo}/>
       </div>
     );
   }

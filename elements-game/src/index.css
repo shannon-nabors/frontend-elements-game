@@ -136,7 +136,10 @@ code {
    padding-left: 2vh
  }
 
- #login-area{
+ #form-area{
    margin-top: 50px;
    width: 50vw;
+   padding: 3vw;
+   border: 1px solid lightgray;
+   border-radius: 10px;
  }
