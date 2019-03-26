@@ -4,15 +4,13 @@ import { Button } from 'semantic-ui-react'
 class ScorePanel extends React.Component {
   render() {
     return (
-      <Fragment>
-        <div>
-          Game over!
-        </div>
+      <div id="score-panel">
+        <p>Game over!</p>
         <p>Your score:</p>
-        <p>{this.props.currentScore()}</p>
-        <p>{this.props.percent()}</p>
-        <Button onClick={this.props.resetQuiz}>Play Again</Button>
-      </Fragment>
+        <p>{this.props.currentScore()} ({this.props.percent()})</p>
+        <br></br>
+        <Button onClick={this.props.resetQuiz} id="next-button">Play Again</Button>
+      </div>
     )
   }
 }

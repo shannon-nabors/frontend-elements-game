@@ -11,14 +11,14 @@ class NavBar extends Component {
       <div id="nav-bar">
         <Container>
           <Menu secondary stackable widths={5}>
-          <Menu.Item header>
+          <Menu.Item header className="nav-item">
             Welcome, {this.props.user.first_name}
           </Menu.Item>
             <Menu.Item
               as={Link}
               to="/periodic_table"
               name="periodic_table"
-              className="ui item"
+              className="ui item nav-item"
               onClick={handleNavSel}
             >
               Periodic Table
@@ -28,7 +28,7 @@ class NavBar extends Component {
               as={Link}
               to="/scores"
               name="score"
-              className="ui item"
+              className="ui item nav-item"
               onClick={handleNavSel}
             >
               Scores
@@ -39,7 +39,7 @@ class NavBar extends Component {
             </Menu.Item>
 
             <Menu.Item
-              className="ui item"
+              className="ui item nav-item"
               name="logout"
               onClick={this.props.logout}
             >

@@ -14,7 +14,6 @@ class App extends Component {
     this.state = {
       elements: [],
       element: null,
-      navSel: 'login',
       gameSel: 'Learn',
       questions: [],
       correct: 0,
@@ -213,7 +212,13 @@ class App extends Component {
   // Handle logout
   handleLogout = () => {
     this.setState({
+      element: null,
+      gameSel: 'Learn',
+      questions: [],
+      correct: 0,
+      total: 0,
       currentUser: {first_name: "Guest"},
+      currentScores: [],
       loggedIn: false
     })
   }

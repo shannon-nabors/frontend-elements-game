@@ -10,10 +10,10 @@ const gameOptions = [
     text: 'Quiz',
     value: 'Quiz'
   },
-  {
-    text: 'Timed',
-    value: 'Timed'
-  }
+  // {
+  //   text: 'Timed',
+  //   value: 'Timed'
+  // }
 ];
 
 const DropdownExampleSelection = props => (
