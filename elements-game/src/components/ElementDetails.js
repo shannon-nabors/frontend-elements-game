@@ -11,6 +11,8 @@ class ElementDetails extends React.Component {
   }
 
   render() {
+
+    console.log(this.props)
     let { number, symbol, atomic_mass, boil, category, discovered_by, melt, name, period, summary, spectral_img } = this.props.element
 
     return ReactDOM.createPortal(
