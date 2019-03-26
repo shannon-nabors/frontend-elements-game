@@ -176,7 +176,42 @@ class App extends Component {
     return (
       <div className="App">
         <Header id="header" as="h1">Elemental Turn-up</Header>
-        <Login update={this.updateUserInfo}/>
+        <div className="ui grid">
+          <div className="ui row">
+            <div className="ui twelve wide column">
+              <Navbar
+                gameSel={this.state.gameSel}
+                handleGameSel={this.handleGameSel}
+                handleNavSel={this.handleNavSel}
+              />
+            </div>
+          </div>
+
+          <div id="nav-bar" className="ui twelve wide column background">
+            <Table
+              elements={this.formatElementsForTable()}
+              handleClick={this.handleElementClick}
+            />
+            {this.state.element && this.state.gameSel === "Learn" ? (
+              <ElementDetails
+                element={this.state.element}
+                exit={this.handleModalExit}
+              />
+            ) : null}
+          </div>
+          <div className="ui four wide column">
+            <SideDisplay
+              elements={this.state.questions}
+              cycleQuestions={this.cycleQuestions}
+              question={this.state.questions[0]}
+              mode={this.state.gameSel}
+              currentElement={this.state.element}
+              setElement={this.setSelectedElement}
+              currentScore={this.displayCurrentScore}
+              percent={this.displayPercent}
+            />
+          </div>
+        </div>
       </div>
     );
   }

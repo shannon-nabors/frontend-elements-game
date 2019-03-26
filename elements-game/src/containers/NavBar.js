@@ -7,17 +7,10 @@ class NavBar extends React.Component {
     const { handleNavSel, handleGameSel } = this.props;
     return (
       <div className="ui secondary  menu">
-        <input
-          type="button"
-          className="item active"
-          value="Login/Create"
-          name="login"
-          onClick={handleNavSel}
-        />
 
         <input
           type="button"
-          className="item"
+          className="item active"
           value="Periodic Table"
           name="periodic"
           onClick={handleNavSel}
