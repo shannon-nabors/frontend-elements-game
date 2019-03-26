@@ -200,10 +200,10 @@ class App extends Component {
           />
           <Route
             path="/create_account"
-            render={() => <Create/>}
+            render={() => <Create update={this.updateUserInfo}/>}
           />
           <Route
-            render={() => <Login/>}
+            render={() => <Login update={this.updateUserInfo}/>}
           />
         </Switch>
       </div>
