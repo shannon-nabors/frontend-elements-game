@@ -198,6 +198,13 @@ class App extends Component {
               displayPercent={this.displayPercent}
             />}
           />
+          <Route
+            path="/create_account"
+            render={() => <Create/>}
+          />
+          <Route
+            render={() => <Login/>}
+          />
         </Switch>
       </div>
     );
