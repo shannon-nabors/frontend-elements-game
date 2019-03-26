@@ -16,6 +16,7 @@ class QuizPage extends Component {
               gameSel={this.props.gameSel}
               handleGameSel={this.props.handleGameSel}
               handleNavSel={this.props.handleNavSel}
+              user={this.props.user}
             />
           </div>
         </div>

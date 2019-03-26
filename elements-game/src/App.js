@@ -21,7 +21,7 @@ class App extends Component {
       questions: [],
       correct: 0,
       total: 0,
-      currentUser: null,
+      currentUser: {first_name: "Guest"},
       currentScores: []
     }
   }
@@ -196,6 +196,7 @@ class App extends Component {
               setSelectedElement={this.setSelectedElement}
               displayCurrentScore={this.displayCurrentScore}
               displayPercent={this.displayPercent}
+              user={this.state.currentUser}
             />}
           />
           <Route

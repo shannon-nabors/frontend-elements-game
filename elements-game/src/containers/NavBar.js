@@ -6,8 +6,8 @@ class NavBar extends React.Component {
   render() {
     const { handleNavSel, handleGameSel } = this.props;
     return (
-      <div className="ui secondary  menu">
-
+      <div className="ui secondary menu" id="nav-bar">
+        <div className="header item">Welcome, {this.props.user.first_name}</div>
         <input
           type="button"
           className="item active"
