@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import NavBar from './NavBar';
 import { Table } from 'semantic-ui-react';
-import TableRow from '../components/TableRow'
+import TableRow from '../components/TableRow';
 
 class ScoresTable extends Component {
   render() {
