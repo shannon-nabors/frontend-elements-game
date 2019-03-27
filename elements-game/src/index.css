@@ -142,3 +142,14 @@ code {
   color: rgba(0,0,0,.87);
   font-weight: lighter;
 }
+
+.ui.table thead th{
+  justify-content: center;
+  text-align: center;
+  background-color: #3843FF;
+  color: white;
+}
+
+.ui.table td {
+  text-align: center;
+}
