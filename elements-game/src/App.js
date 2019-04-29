@@ -229,7 +229,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header id="header" as="h1">
-          Elemental Turn-up
+          Elemental
         </Header>
 
         <Switch>
